@@ -5,8 +5,8 @@ from twilio.rest import Client
 STOCK_NAME = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 
-STOCK_API_KEY = "QRE9A28VEFPWGNVZ"
-NEWS_API_KEY = "6ad9106ad1d94782a3c680495800d8e6"
+STOCK_API_KEY = "tradview api key"
+NEWS_API_KEY = "news_api_key"
 
 STOCK_ENDPOINT = "https://www.alphavantage.co/query"
 NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
@@ -77,7 +77,7 @@ if abs(percentage_difference) > 1:
 
     # TODO 9. - Send each article as a separate message via Twilio.
     twilio_account_sid = "twili"
-    twilio_auth_token = "7c5d331e1ae26929dfe76ab512cebd9e"
+    twilio_auth_token = "twilio_auth key"
 
     client = Client(twilio_account_sid, twilio_auth_token)
 
