@@ -26,27 +26,33 @@ data = response.json()["Time Series (Daily)"]
 data_list = [value for (key, value) in data.items()]
 last_day_data_list = data_list[0]
 last_closing_stock_price = last_day_data_list['4. close']
-print(last_closing_stock_price)
+# print(last_closing_stock_price)
 
 #TODO 2. - Get the day before yesterday's closing stock price
 yesterday_data_list = data_list[1]
 yesterday_closing_stock_price = yesterday_data_list['4. close']
-print(yesterday_closing_stock_price)
+# print(yesterday_closing_stock_price)
 
 
 #TODO 3. - Find the positive difference between 1 and 2. e.g. 40 - 20 = -20, but the positive difference is 20. Hint: https://www.w3schools.com/python/ref_func_abs.asp
-difference = abs(float(last_closing_stock_price) - float(yesterday_closing_stock_price))
-print(difference)
+difference = float(last_closing_stock_price) - float(yesterday_closing_stock_price)
+up_down = None
+if difference < 0:
+    up_down = "🔻"
+else:
+    up_down = "🔺"
+
+
+
 
 #TODO 4. - Work out the percentage difference in price between closing price yesterday and closing price the day before yesterday.
-percentage_difference = (difference / float(yesterday_closing_stock_price)) * 100
-print(percentage_difference)
+percentage_difference = round((difference / float(yesterday_closing_stock_price)) * 100)
+# print(percentage_difference)
 #
 #TODO 5. - If TODO4 percentage is greater than 5 then print("Get News").
 
-if percentage_difference < 5:
+if abs(percentage_difference) > 1:
     # TODO 6. - Instead of printing ("Get News"), use the News API to get articles related to the COMPANY_NAME.
-
     news_params = {
         'apiKey': NEWS_API_KEY,
         'qInTitle': COMPANY_NAME,
@@ -63,7 +69,7 @@ if percentage_difference < 5:
     three_articles = articles[:3]
 
     #TODO 8. - Create a new list of the first 3 article's headline and description using list comprehension.
-    formate_articles = [f"Headline:{articles['title']} \n\n Brief:{articles['description']}" for articles in three_articles]
+    formate_articles = [f"{STOCK_NAME}\n{up_down}Headline:{articles['title']} \n\n Brief:{articles['description']}" for articles in three_articles]
 
 
     ## STEP 3: Use twilio.com/docs/sms/quickstart/python
@@ -80,7 +86,7 @@ if percentage_difference < 5:
         message = client.messages.create(
             body=arti_cles,
             from_='+13203825930',
-            to='01739933258'
+            to='+8801739933258'
         )
 
         print(message.sid)
