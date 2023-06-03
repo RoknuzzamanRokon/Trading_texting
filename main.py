@@ -76,7 +76,7 @@ if abs(percentage_difference) > 1:
     #to send a separate message with each article's title and description to your phone number. 
 
     # TODO 9. - Send each article as a separate message via Twilio.
-    twilio_account_sid = "AC970466a3e4666ce524b8a1287bc3249a"
+    twilio_account_sid = "twili"
     twilio_auth_token = "7c5d331e1ae26929dfe76ab512cebd9e"
 
     client = Client(twilio_account_sid, twilio_auth_token)
@@ -85,20 +85,9 @@ if abs(percentage_difference) > 1:
     for arti_cles in formate_articles:
         message = client.messages.create(
             body=arti_cles,
-            from_='+13203825930',
-            to='+8801739933258'
+            from_='from_twilio_number',
+            to='to_number'
         )
 
         print(message.sid)
-
-#Optional TODO: Format the message like this:
-"""
-TSLA: 🔺2%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-or
-"TSLA: 🔻5%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-"""
 
